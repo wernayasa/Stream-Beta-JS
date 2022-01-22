@@ -1,4 +1,7 @@
-const robandit = {
+<div id='robandit'>
+                <script>
+                //<![CDATA[
+                const robandit = {
 	cImage: function(e) {
 		let t = e,
 			r = t.indexOf("<img"),
@@ -33,14 +36,19 @@ const robandit = {
 		for (; A < e.jumlah;) {
 			if (e.setArr.urls[u] != h) {
 				const t = document.createElement("li");
-				if (t.innerHTML = `<div class="thumb">
+				if (t.innerHTML = `
+                <div class="robandit-otx">
+                <div class="thumb">
                 <a href="${e.setArr.urls[u]}" title="${e.setArr.title[u]}">
                 <img src="${e.setArr.image[u]}" alt="${e.setArr.title[u]}">
                 </a></div>
-                <a class="judul" href="${e.setArr.urls[u]}" title="${e.setArr.title[u]}">${e.setArr.title[u]}</a>
+                <div class="robandit-ocn">
+                <h2><a class="judul" href="${e.setArr.urls[u]}" title="${e.setArr.title[u]}">${e.setArr.title[u]}</a></h2>
+                </div>
                 <br/>
-                <a class="atribut-trailer" href="http://www.youtube.com/results?search_query=${e.setArr.title[u]}" target="_blank">Trailer</a>
-                <a class="atribut-movie" href="${e.setArr.urls[u]}" title="${e.setArr.title[u]}" rel="nofollow">Movie</a>
+                <div class="atribut-trailer"><h2><a href="http://www.youtube.com/results?search_query=${e.setArr.title[u]}" target="_blank">Trailer</a></h2></div>
+                <div class="atribut-movie"><h2><a href="${e.setArr.urls[u]}" title="${e.setArr.title[u]}" rel="nofollow">Nonton Movie</a></h2></div>
+                </div>
                 `, document.querySelector("#robandit ul").appendChild(t), A++, A == e.jumlah) break
 			}
 			if (u < e.setArr.title.length - 1 ? u++ : u = 0, u == o) break
@@ -68,5 +76,17 @@ const robandit = {
 		rel: 0
 	}
 };
-robandit.jumlah = 10;
+robandit.jumlah = 5;
 robandit.noImage = 'https://i.imgur.com/NIDHEwU.png';
+               //]]></script>
+               <b:if cond='data:post.labels'>
+               <b:loop values='data:post.labels' var='label'>
+               <script expr:src='&quot;/feeds/posts/default/-/&quot; + data:label.name + &quot;?alt=json-in-script&amp;callback=robandit.set&amp;max-results=10&quot;'/>
+               </b:loop>
+               <ul>
+               <script>robandit.compile();</script>
+                </ul>
+               <b:else/>
+               Gagal Index, Maaf
+               </b:if>
+               </div>
